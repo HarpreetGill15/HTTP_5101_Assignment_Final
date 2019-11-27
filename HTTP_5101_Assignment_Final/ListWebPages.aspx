@@ -4,7 +4,7 @@
     <div class="card">
         <asp:Label runat="server" for="webpage_search">Search Page:</asp:Label>
         <asp:TextBox ID="webpage_search" runat="server"></asp:TextBox>
-        <asp:Button runat="server" Text="Search"/>
+        <asp:Button runat="server" Text="Search!"/>
     </div>
     <div id="list_pages" runat="server">
 
