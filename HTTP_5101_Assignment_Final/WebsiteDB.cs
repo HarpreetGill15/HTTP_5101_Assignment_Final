@@ -127,7 +127,7 @@ namespace HTTP_5101_Assignment_Final
                                 //how to convert a string to a date?
                                 //http://net-informations.com/q/faq/stringdate.html
                                 //https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
-                                currentpage.set_W_publish_date(DateTime.ParseExact(value, "M/d/yyyy hh:mm:ss tt", new CultureInfo("en-US")));
+                                currentpage.set_W_publish_date(DateTime.ParseExact(value, "ddd dd MMM yyyy", new CultureInfo("en-US")));
                                 break;
                         }
 

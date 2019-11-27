@@ -12,12 +12,12 @@ namespace HTTP_5101_Assignment_Final
         protected void Page_Load(object sender, EventArgs e)
         {
             var db = new WebsiteDB();
-            string search_text = "";
+            string search_text = webpage_search.Text.ToString();
             string query = "select * from pages";
 
 
 
-            List<Dictionary<String, String>> rs = db.List_Query(query);
+            List<Dictionary<String, String>> rs = db.List_Query(query + " where page_title like '%" + search_text + "%'");
             list_pages.InnerHtml += "<table class=\"table\"><thead><tr>" +
                     "<th>Page Title</th>" +
                     "<th>Author</th>" +
@@ -32,7 +32,7 @@ namespace HTTP_5101_Assignment_Final
                 list_pages.InnerHtml += "<tr>";
 
                 string pagetitle = row["page_title"];
-                list_pages.InnerHtml += "<td>" + pagetitle + "</td>";
+                list_pages.InnerHtml += "<td><a href=\"SinglePage.aspx?pageid=" + pageid + "\">" + pagetitle + "</a></td>";
 
                 string pageauthor = row["publish_author"];
                 list_pages.InnerHtml += "<td>" + pageauthor + "</td>";
@@ -48,13 +48,13 @@ namespace HTTP_5101_Assignment_Final
             list_pages.InnerHtml += "</tbody></table>";
             if (Page.IsPostBack)
             {
-                search_text = webpage_search.Text.ToString();
+                
 
                 string query2 = "select * from pages";
 
                 
 
-                List<Dictionary<String, String>> ros = db.List_Query(query2 + " where page_title like '%" +search_text+"%'");
+                List<Dictionary<String, String>> ros = db.List_Query(query2 );
                 list_pages.InnerHtml = "";
                 list_pages.InnerHtml += "<table class=\"table\"><thead><tr>" +
                         "<th>Page Title</th>" +
