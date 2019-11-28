@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,6 +28,7 @@ namespace HTTP_5101_Assignment_Final
                 {
                     foreach(Dictionary<String,String> pagedata in page)
                     {
+                        Webpage webpage = new Webpage();
                         string pagetitle = pagedata["page_title"];
                         string pagebody = pagedata["page_body"];
                         string pageauthor = pagedata["publish_author"];
@@ -34,10 +36,14 @@ namespace HTTP_5101_Assignment_Final
                         string publishdate = pagedata["publish_date"];
 
                         title.InnerHtml = pagetitle;
+                        webpage.set_W_title(pagetitle);
                         date.InnerHtml = publishdate;
                         body.InnerHtml = pagebody;
+                        webpage.set_W_body(pagebody);
                         authour.InnerHtml = pageauthor;
+                        webpage.set_W_author(pageauthor);
                         state.InnerHtml = publishstate;
+                        webpage.set_W_publish_state(publishstate);
                     }
                 }
             }

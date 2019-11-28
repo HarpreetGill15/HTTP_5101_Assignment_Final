@@ -10,24 +10,33 @@
 namespace HTTP_5101_Assignment_Final {
     
     
-    public partial class SiteMaster {
+    public partial class DeletePage {
         
         /// <summary>
-        /// nav control.
+        /// page control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl nav;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl page;
         
         /// <summary>
-        /// MainContent control.
+        /// yes_delete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button yes_delete;
+        
+        /// <summary>
+        /// go_back control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button go_back;
     }
 }

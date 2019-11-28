@@ -195,6 +195,29 @@ namespace HTTP_5101_Assignment_Final
 
             Connect.Close();
         }
+        public void publishWebpage(int pageid)
+        {
+            string query = "update pages set page_state='Published'";
+            query = String.Format(query);
+
+            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            try
+            {
+                //Try to update a student with the information provided to us.
+                Connect.Open();
+                cmd.ExecuteNonQuery();
+                Debug.WriteLine("Executed query " + query);
+            }
+            catch (Exception ex)
+            {
+                //If that doesn't seem to work, check Debug>Windows>Output for the below message
+                Debug.WriteLine("Something went wrong in the publishWebpage Method!");
+                Debug.WriteLine(ex.ToString());
+            }
+
+            Connect.Close();
+        }
         public void DeleteWebpage(int pageid)
         {
             string deletePage = "delete from pages where page_id = {0}";
