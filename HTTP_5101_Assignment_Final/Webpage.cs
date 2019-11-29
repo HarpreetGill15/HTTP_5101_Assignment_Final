@@ -12,7 +12,7 @@ namespace HTTP_5101_Assignment_Final
         private string w_body;
         private string w_author;
         private string w_publish_state;
-        private DateTime w_publish_date;
+        private string w_publish_date;
 
 
         //getters
@@ -32,7 +32,7 @@ namespace HTTP_5101_Assignment_Final
         {
             return w_publish_state;
         }
-        public DateTime get_W_publish_date()
+        public string get_W_publish_date()
         {
             return w_publish_date;
         }
@@ -55,7 +55,7 @@ namespace HTTP_5101_Assignment_Final
         {
             w_publish_state = publish_state;
         }
-        public void set_W_publish_date(DateTime publish_date)
+        public void set_W_publish_date(string publish_date)
         {
             w_publish_date = publish_date;
         }

@@ -127,7 +127,7 @@ namespace HTTP_5101_Assignment_Final
                                 //how to convert a string to a date?
                                 //http://net-informations.com/q/faq/stringdate.html
                                 //https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
-                                currentpage.set_W_publish_date(DateTime.ParseExact(value, "ddd dd MMM yyyy", new CultureInfo("en-US")));
+                                currentpage.set_W_publish_date(value);
                                 break;
                         }
 
@@ -151,10 +151,15 @@ namespace HTTP_5101_Assignment_Final
 
             return result_page;
         }
+        public void ShowAuthors()
+        {
+            string query = "select * from authors";
+            
+        }
         public void AddWebpage(Webpage webpage)
         {
             string query = "insert into pages(page_title,page_body,publish_author,publish_state,publish_date) values ('{0}','{1}','{2}','{3}','{4}')";
-            query = String.Format(query, webpage.get_W_title(), webpage.get_W_body(), webpage.get_W_author(), webpage.get_W_publish_state(), webpage.get_W_publish_date().ToString("MM-dd-yyyy hh:mm"));
+            query = String.Format(query, webpage.get_W_title(), webpage.get_W_body(), webpage.get_W_author(), webpage.get_W_publish_state(), webpage.get_W_publish_date());
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, Connect);
@@ -174,8 +179,8 @@ namespace HTTP_5101_Assignment_Final
         }
         public void UpdateWebpage(int pageid,Webpage webpage)
         {
-            string query = "update pages set page_title='{0}', page_body='{1}', publish_author='{2}',publish_state='{3}',publish_date='{4}'";
-            query = String.Format(query, webpage.get_W_title(), webpage.get_W_body(), webpage.get_W_author(), webpage.get_W_publish_state(), webpage.get_W_publish_date().ToString("MM-dd-yyyy hh:mm"));
+            string query = "update pages set page_title='{0}', page_body='{1}', publish_author='{2}' where page_id = "+pageid;
+            query = String.Format(query, webpage.get_W_title(), webpage.get_W_body(), webpage.get_W_author());
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, Connect);
@@ -195,9 +200,9 @@ namespace HTTP_5101_Assignment_Final
 
             Connect.Close();
         }
-        public void publishWebpage(int pageid)
+        public void publishWebpage(int pageid,string date)
         {
-            string query = "update pages set page_state='Published'";
+            string query = "update pages set publish_state='Published',publish_date='"+date+"' where page_id = "+pageid;
             query = String.Format(query);
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
@@ -218,9 +223,32 @@ namespace HTTP_5101_Assignment_Final
 
             Connect.Close();
         }
+        public void unPublishWebpage(int pageid)
+        {
+            string query = "update pages set publish_state='Not Published', publish_date='' where page_id = " + pageid;
+            query = String.Format(query);
+
+            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            try
+            {
+                //Try to update a student with the information provided to us.
+                Connect.Open();
+                cmd.ExecuteNonQuery();
+                Debug.WriteLine("Executed query " + query);
+            }
+            catch (Exception ex)
+            {
+                //If that doesn't seem to work, check Debug>Windows>Output for the below message
+                Debug.WriteLine("Something went wrong in the unpublishWebpage Method!");
+                Debug.WriteLine(ex.ToString());
+            }
+
+            Connect.Close();
+        }
         public void DeleteWebpage(int pageid)
         {
-            string deletePage = "delete from pages where page_id = {0}";
+            string deletePage = "delete from pages where page_id ="+pageid;
             deletePage = String.Format(deletePage, pageid);
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);

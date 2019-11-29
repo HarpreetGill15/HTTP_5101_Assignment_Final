@@ -48,7 +48,7 @@ namespace HTTP_5101_Assignment_Final
 
                     list_pages.InnerHtml += "<td><a href=\"UpdatePage.aspx?pageid=" + pageid + "\">"+
                         "<span class=\"glyphicon glyphicon-upload\"></span><span class=\"glyphicon glyphicon-cog\"></span></a>"+
-                        "<a href=\"DeletePage.aspx?=" + pageid +"\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
+                        "<a href=\"DeletePage.aspx?pageid=" + pageid +"\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
                     Debug.WriteLine(pageid);
                     list_pages.InnerHtml += "</tr>";
                 }
@@ -87,7 +87,7 @@ namespace HTTP_5101_Assignment_Final
 
                         list_pages.InnerHtml += "<td><a href=\"UpdatePage.aspx?pageid=" + pageid + "\">" +
                         "<span class=\"glyphicon glyphicon-upload\"></span><span class=\"glyphicon glyphicon-cog\"></span></a>" +
-                        "<a href=\"DeletePage.aspx?="+ pageid +"\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
+                        "<a href=\"DeletePage.aspx?pageid="+ pageid +"\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
                         Debug.WriteLine(pageid);
 
                         list_pages.InnerHtml += "</tr>";
@@ -103,6 +103,11 @@ namespace HTTP_5101_Assignment_Final
             //List<Dictionary<String, String>> rs = db.List_Query(query);
             
            
+        }
+
+        protected void addPage(object sender, EventArgs e)
+        {
+            Response.Redirect("AddPage.aspx");
         }
     }
 }

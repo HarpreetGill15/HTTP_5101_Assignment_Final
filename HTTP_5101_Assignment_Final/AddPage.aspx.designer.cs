@@ -10,25 +10,16 @@
 namespace HTTP_5101_Assignment_Final {
     
     
-    public partial class UpdatePage {
+    public partial class AddPage {
         
         /// <summary>
-        /// pagename control.
+        /// newClassForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pagename;
-        
-        /// <summary>
-        /// updatepageForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl updatepageForm;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl newClassForm;
         
         /// <summary>
         /// txtpage_title control.
@@ -58,30 +49,21 @@ namespace HTTP_5101_Assignment_Final {
         protected global::System.Web.UI.WebControls.DropDownList ddpage_author;
         
         /// <summary>
-        /// publish_button control.
+        /// chkpublish control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button publish_button;
+        protected global::System.Web.UI.WebControls.CheckBox chkpublish;
         
         /// <summary>
-        /// unpublish_button control.
+        /// addbutton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button unpublish_button;
-        
-        /// <summary>
-        /// add_button control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button add_button;
+        protected global::System.Web.UI.WebControls.Button addbutton;
     }
 }

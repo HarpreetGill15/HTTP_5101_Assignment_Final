@@ -21,11 +21,15 @@
                 <div class="form-group row">
                     <label for="ddpage_author" class="col-sm-3 col-form-label">Page Author</label>
                     <div class="col-sm-5">
-                        <asp:DropDownList ID="ddpage_author" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddpage_author" runat="server">
+                            <asp:ListItem></asp:ListItem>
+                        </asp:DropDownList>
+                        
                     </div>
                 </div> 
                 <asp:Button runat="server" Text="Publish" ID="publish_button" OnClick="publish_button_Click" CssClass="btn btn-primary" />
-                <%--<asp:Button runat="server" Text="Update" ID="add_button" OnClick="UpdateButton_Click" cssClass="btn btn-warning"/>--%>
+                <asp:Button runat="server" Text="Un Publish" ID="unpublish_button" OnClick="unpublish_button_Click" CssClass="btn btn-primary" />
+                <asp:Button runat="server" Text="Update" ID="add_button" OnClick="UpdateButton_Click" cssClass="btn btn-warning"/>
             </div>
     </div>
 </asp:Content>
