@@ -39,19 +39,13 @@ namespace HTTP_5101_Assignment_Final
             // check if connected to database
             try
             {
-                Debug.WriteLine("Connection Initialized...");
-                Debug.WriteLine("Attempting to execute query " + Query);
-                //open the db connection
                 Connect.Open();
-                //give the connection a query
                 MySqlCommand cmd = new MySqlCommand(Query, Connect);
-                //grab the result set
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
                 while (resultset.Read())
                 {
                     Dictionary<String, String> Row = new Dictionary<String, String>();
-                    //for every column in the row
                     for (int i = 0; i < resultset.FieldCount; i++)
                     {
                         Row.Add(resultset.GetName(i), resultset.GetString(i));
@@ -59,15 +53,15 @@ namespace HTTP_5101_Assignment_Final
                     }
 
                     ResultSet.Add(Row);
-                }//end row
+                }
                 resultset.Close();
 
-            }//end try
+            }
             catch (Exception ex)
             {
-                Debug.WriteLine("Something went wrong in the List_Query method!");
+                Debug.WriteLine("Check the List_Query()");
                 Debug.WriteLine(ex.ToString());
-            }//end catch
+            }
             Connect.Close();
             Debug.WriteLine("Database Connection Terminated.");
 
@@ -76,39 +70,26 @@ namespace HTTP_5101_Assignment_Final
         public Webpage FindWebPage(int id)
         {
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            //create a "blank" student so that our method can return something if we're not successful catching student data
             Webpage result_page = new Webpage();
 
-            //we will try to grab student data from the database, if we fail, a message will appear in Debug>Windows>Output dialogue
             try
             {
-                //Build a custom query with the id information provided
                 string query = "select * from PAGES where page_id = " + id;
-                Debug.WriteLine("Connection Initialized...");
-                //open the db connection
+
                 Connect.Open();
-                //Run out query against the database
                 MySqlCommand cmd = new MySqlCommand(query, Connect);
-                //grab the result set
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
-                //Create a list of students (although we're only trying to get 1)
                 List<Webpage> page = new List<Webpage>();
 
-                //read through the result set
                 while (resultset.Read())
                 {
-                    //information that will store a single student
                     Webpage currentpage = new Webpage();
-
-                    //Look at each column in the result set row, add both the column name and the column value to our Student dictionary
                     for (int i = 0; i < resultset.FieldCount; i++)
                     {
                         string key = resultset.GetName(i);
                         string value = resultset.GetString(i);
                         Debug.WriteLine("Attempting to transfer " + key + " data of " + value);
-                        //can't just generically put data into a dictionary anymore
-                        //must go through each column one by one to insert data into the right property
                         switch (key)
                         {
                             case "page_title":
@@ -124,25 +105,20 @@ namespace HTTP_5101_Assignment_Final
                                 currentpage.set_W_publish_state(value);
                                 break;
                             case "publish_date":
-                                //how to convert a string to a date?
-                                //http://net-informations.com/q/faq/stringdate.html
-                                //https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
                                 currentpage.set_W_publish_date(value);
                                 break;
                         }
 
                     }
-                    //Add the student to the list of students
                     page.Add(currentpage);
                 }
 
-                result_page = page[0]; //get the first student
+                result_page = page[0]; 
 
             }
             catch (Exception ex)
             {
-                //If something (anything) goes wrong with the try{} block, this block will execute
-                Debug.WriteLine("Something went wrong in the find Webpage method!");
+                Debug.WriteLine("Check the findWebpage()");
                 Debug.WriteLine(ex.ToString());
             }
 
@@ -150,11 +126,6 @@ namespace HTTP_5101_Assignment_Final
             Debug.WriteLine("Database Connection Terminated.");
 
             return result_page;
-        }
-        public void ShowAuthors()
-        {
-            string query = "select * from authors";
-            
         }
         public void AddWebpage(Webpage webpage)
         {
@@ -171,7 +142,7 @@ namespace HTTP_5101_Assignment_Final
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Something went wrong in the AddWebPage Method!");
+                Debug.WriteLine("Check the AddWebpage()");
                 Debug.WriteLine(ex.ToString());
             }
 
@@ -186,15 +157,13 @@ namespace HTTP_5101_Assignment_Final
             MySqlCommand cmd = new MySqlCommand(query, Connect);
             try
             {
-                //Try to update a student with the information provided to us.
                 Connect.Open();
                 cmd.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + query);
             }
             catch (Exception ex)
             {
-                //If that doesn't seem to work, check Debug>Windows>Output for the below message
-                Debug.WriteLine("Something went wrong in the UpdateWebpage Method!");
+                Debug.WriteLine("Check the UpdateWebpage()");
                 Debug.WriteLine(ex.ToString());
             }
 
@@ -202,22 +171,21 @@ namespace HTTP_5101_Assignment_Final
         }
         public void publishWebpage(int pageid,string date)
         {
-            string query = "update pages set publish_state='Published',publish_date='"+date+"' where page_id = "+pageid;
+            string query = "update pages set publish_state='Published', publish_date = '"+date+"' where page_id = "+pageid;
             query = String.Format(query);
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, Connect);
             try
             {
-                //Try to update a student with the information provided to us.
+                //Update with user info
                 Connect.Open();
                 cmd.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + query);
             }
             catch (Exception ex)
             {
-                //If that doesn't seem to work, check Debug>Windows>Output for the below message
-                Debug.WriteLine("Something went wrong in the publishWebpage Method!");
+                Debug.WriteLine("Check the publishWebpage()");
                 Debug.WriteLine(ex.ToString());
             }
 
@@ -225,22 +193,20 @@ namespace HTTP_5101_Assignment_Final
         }
         public void unPublishWebpage(int pageid)
         {
-            string query = "update pages set publish_state='Not Published', publish_date='' where page_id = " + pageid;
+            string query = "update pages set publish_state = 'Not Published', publish_date ='' where page_id = " + pageid;
             query = String.Format(query);
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
             MySqlCommand cmd = new MySqlCommand(query, Connect);
             try
             {
-                //Try to update a student with the information provided to us.
                 Connect.Open();
                 cmd.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + query);
             }
             catch (Exception ex)
             {
-                //If that doesn't seem to work, check Debug>Windows>Output for the below message
-                Debug.WriteLine("Something went wrong in the unpublishWebpage Method!");
+                Debug.WriteLine("Check the unpublishWebpage()");
                 Debug.WriteLine(ex.ToString());
             }
 
@@ -248,7 +214,7 @@ namespace HTTP_5101_Assignment_Final
         }
         public void DeleteWebpage(int pageid)
         {
-            string deletePage = "delete from pages where page_id ="+pageid;
+            string deletePage = "delete from pages where page_id = "+pageid;
             deletePage = String.Format(deletePage, pageid);
 
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
@@ -257,16 +223,14 @@ namespace HTTP_5101_Assignment_Final
 
             try
             {
-                //try to execute both commands!
+                //delete from database
                 Connect.Open();
-                //remember to remove the relational element first
                 cmd_deletepage.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + cmd_deletepage);
             }
             catch (Exception ex)
             {
-                //if this isn't working as intended, you can check debug>windows>output for the error message.
-                Debug.WriteLine("Something went wrong in the delete page Method!");
+                Debug.WriteLine("Check the deleteWebpage()");
                 Debug.WriteLine(ex.ToString());
             }
 

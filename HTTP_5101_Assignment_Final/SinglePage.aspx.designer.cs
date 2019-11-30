@@ -22,22 +22,13 @@ namespace HTTP_5101_Assignment_Final {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl title;
         
         /// <summary>
-        /// authour control.
+        /// author control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl authour;
-        
-        /// <summary>
-        /// body control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl body;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl author;
         
         /// <summary>
         /// state control.
@@ -56,5 +47,14 @@ namespace HTTP_5101_Assignment_Final {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl date;
+        
+        /// <summary>
+        /// body control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl body;
     }
 }

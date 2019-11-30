@@ -12,10 +12,10 @@ namespace HTTP_5101_Assignment_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            alert.Visible = false;
             if (!IsPostBack)
             {
                 populate_authordropdown();
-                Debug.WriteLine(DateTime.Now);
             }
             
         }
@@ -48,18 +48,29 @@ namespace HTTP_5101_Assignment_Final
             WebsiteDB dB = new WebsiteDB();
             string query = "select * from author";
 
-             List<Dictionary<string, string>> page = dB.List_Query(query);
-
-            if (page.Count > 0)
+            try
             {
-                foreach (Dictionary<String, String> pagedata in page)
+                List<Dictionary<string, string>> page = dB.List_Query(query);
+
+                if (page.Count > 0)
                 {
-                    string authorName = pagedata["author_name"];
-                    string authorid = pagedata["author_id"];
-                    ListItem authors = new ListItem(authorName, authorid);
-                    ddpage_author.Items.Add(authors);
+                    foreach (Dictionary<String, String> pagedata in page)
+                    {
+                        string authorName = pagedata["author_name"];
+                        string authorid = pagedata["author_id"];
+                        ListItem authors = new ListItem(authorName, authorid);
+                        ddpage_author.Items.Add(authors);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                alert.Visible = true;
+                output.InnerHtml = "Error. Contact Support " + ex;
+            }
+            
+
+            
         }
     }
 }

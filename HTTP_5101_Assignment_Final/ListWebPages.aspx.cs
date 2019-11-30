@@ -14,12 +14,8 @@ namespace HTTP_5101_Assignment_Final
         {
             var db = new WebsiteDB();
             string search_text = webpage_search.Text.ToString();
-            //select PAGE_TITLE, PAGE_BODY, author_name
-            //from PAGES
-            //join AUTHOR
-            //on PUBLISH_AUTHOR = author_id;
+            
             string query = "select * from pages join author on publish_author = author_id where page_title like '%" + search_text + "%'";
-
 
             try
             {
@@ -55,11 +51,7 @@ namespace HTTP_5101_Assignment_Final
                 list_pages.InnerHtml += "</tbody></table>";
                 if (Page.IsPostBack)
                 {
-
-
                     string query2 = "select * from pages";
-
-
 
                     List<Dictionary<String, String>> ros = db.List_Query(query2);
                     list_pages.InnerHtml = "";
@@ -98,11 +90,7 @@ namespace HTTP_5101_Assignment_Final
             catch(Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-            }
-
-            //List<Dictionary<String, String>> rs = db.List_Query(query);
-            
-           
+            }   
         }
 
         protected void addPage(object sender, EventArgs e)

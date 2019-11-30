@@ -12,13 +12,14 @@ namespace HTTP_5101_Assignment_Final
         protected void Page_Load(object sender, EventArgs e)
         {
             var db = new WebsiteDB();
+            //only select the pages that have been published
             string query = "select page_id, page_title from pages where publish_state = 'Published'";
             List<Dictionary<string, string>> page = db.List_Query(query);
-            
-                        
-                    
-            nav.InnerHtml = "<ul class=\"nav navbar-nav\"><li><a runat=\"server\" href=\"~/ \">Home</a></li>" +
-                        "<li><a runat = \"server\" href = \"~/About\"> Authors </a></li>";
+
+
+
+            nav.InnerHtml = "<ul class=\"nav navbar-nav\">"+
+                            "<li><a runat=\"server\" href=\"ListWebPages.aspx\">Dashboard</a></li>";
 
             if (page.Count > 0)
             {
@@ -29,6 +30,7 @@ namespace HTTP_5101_Assignment_Final
 
                     nav.InnerHtml += "<li><a runat = \"server\" href = \"SinglePage.aspx?pageid=" + pageid + "\">" + pagetitle+"</a></li>";
                 }
+                nav.InnerHtml += "</ul>";
             }
         }
     }

@@ -12,19 +12,18 @@ namespace HTTP_5101_Assignment_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            alert.Visible = false;
         }
 
         protected void yes_delete_Click(object sender, EventArgs e)
         {
-            bool flag = true;
+            Boolean flag = true;
             int pageid = Convert.ToInt32(Request.QueryString["pageid"]);
+            if (pageid.Equals(null) || pageid.Equals(0)) flag = false;
 
-            if (pageid.Equals(null)) flag = false;
-
-            if (flag == true)
+            if (flag)
             {
-                
+
                 Debug.WriteLine(pageid);
                 WebsiteDB db = new WebsiteDB();
 
@@ -33,7 +32,9 @@ namespace HTTP_5101_Assignment_Final
             }
             else
             {
-
+                alert.Visible = true;
+                alert.Attributes.Add("class", "alert alert-danger");
+                output.InnerHtml = "Error please return home";
             }
         }
 

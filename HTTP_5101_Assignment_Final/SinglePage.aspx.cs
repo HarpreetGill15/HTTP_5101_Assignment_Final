@@ -21,7 +21,7 @@ namespace HTTP_5101_Assignment_Final
             if (flag == true)
             {
                 var db = new WebsiteDB();
-                string query = "select * from pages where page_id = " + pageid;
+                string query = "select * from pages join author on publish_author = author_id where page_id = " + pageid;
                 List<Dictionary<string,string>> page = db.List_Query(query);
 
                 if(page.Count > 0)
@@ -31,7 +31,7 @@ namespace HTTP_5101_Assignment_Final
                         Webpage webpage = new Webpage();
                         string pagetitle = pagedata["page_title"];
                         string pagebody = pagedata["page_body"];
-                        string pageauthor = pagedata["publish_author"];
+                        string pageauthor = pagedata["author_name"];
                         string publishstate = pagedata["publish_state"];
                         string publishdate = pagedata["publish_date"];
 
@@ -40,7 +40,7 @@ namespace HTTP_5101_Assignment_Final
                         date.InnerHtml = publishdate;
                         body.InnerHtml = pagebody;
                         webpage.set_W_body(pagebody);
-                        authour.InnerHtml = pageauthor;
+                        author.InnerHtml = pageauthor;
                         webpage.set_W_author(pageauthor);
                         state.InnerHtml = publishstate;
                         webpage.set_W_publish_state(publishstate);

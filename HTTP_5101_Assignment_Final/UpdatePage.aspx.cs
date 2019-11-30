@@ -12,55 +12,89 @@ namespace HTTP_5101_Assignment_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //populate the author dropdown when the page loads with authors
             populate_authordropdown();
+            alert.Visible = false;
+
             if (!IsPostBack)
             {
-                showpageinfo();
                 
-            }
-
-            
+                showpageinfo();   
+            }     
         }
 
         protected void publish_button_Click(object sender, EventArgs e)
         {
-            WebsiteDB dB = new WebsiteDB();
+            Boolean flag = true;
             int pageid = Convert.ToInt32(Request.QueryString["pageid"]);
-            string date = DateTime.Now.ToString("dddd, dd MMMM yyyy h:mm tt");
+            if (pageid.Equals(null) || pageid.Equals(0)) flag = false;
 
-            dB.publishWebpage(pageid,date);
-            Response.Redirect("UpdatePage.aspx?pageid=" + pageid);
+            if (flag)
+            {
+                WebsiteDB dB = new WebsiteDB();
+
+                string date = DateTime.Now.ToString("dddd, dd MMMM yyyy h:mm tt");
+
+                dB.publishWebpage(pageid, date);
+
+                alert.Visible = true;
+                output.InnerHtml = "Publish Success!"; 
+            }
+            else
+            {
+                alert.Visible = true;
+                output.InnerHtml = "Error occured. Please try again";
+            }
+            
         }
         protected void showpageinfo()
         {
-            WebsiteDB dB = new WebsiteDB();
             
-            string pageid = Request.QueryString["pageid"];
-            Webpage webpage = dB.FindWebPage(Int32.Parse(pageid));
+            WebsiteDB dB = new WebsiteDB();
+            Boolean flag = true;
+            int pageid = Convert.ToInt32(Request.QueryString["pageid"]);
+            if (pageid.Equals(null) || pageid.Equals(0)) flag = false;
 
-            txtpage_title.Text = webpage.get_W_title();
-            txtpage_body.InnerText = webpage.get_W_body();
-            ddpage_author.SelectedValue = webpage.get_W_author();
+            if (flag)
+            {
+                Webpage webpage = dB.FindWebPage(pageid);
+
+                pagename.InnerText = webpage.get_W_title();
+                txtpage_title.Text = webpage.get_W_title();
+                txtpage_body.InnerText = webpage.get_W_body();
+                ddpage_author.SelectedValue = webpage.get_W_author();
+                
+            }
+            else
+            {
+                alert.Visible = true;
+                alert.Attributes.Add("class","alert alert-danger");
+                output.InnerHtml = "Error please go back home";
+            }
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             WebsiteDB dB = new WebsiteDB();
             Webpage webpage = new Webpage();
-            string pageid = Request.QueryString["pageid"];
-            Debug.Write(txtpage_title.Text+" "+ txtpage_body.InnerText+ " "+ ddpage_author.SelectedValue);
-            webpage.set_W_title(txtpage_title.Text);
-            webpage.set_W_body(txtpage_body.InnerText);
-            webpage.set_W_author(ddpage_author.SelectedValue);
-            try
+            Boolean flag = true;
+            int pageid = Convert.ToInt32(Request.QueryString["pageid"]);
+            if (pageid.Equals(null) || pageid.Equals(0)) flag = false;
+
+            if (flag)
             {
-                dB.UpdateWebpage(Int32.Parse(pageid), webpage);
+                webpage.set_W_title(txtpage_title.Text);
+                webpage.set_W_body(txtpage_body.InnerText);
+                webpage.set_W_author(ddpage_author.SelectedValue);
+
+                dB.UpdateWebpage(pageid, webpage);
                 Response.Redirect("SinglePage.aspx?pageid=" + pageid);
             }
-            catch(Exception ex)
+            else
             {
-                Debug.Write("What happened");
-                Debug.Write(ex);
+                alert.Visible = true;
+                alert.Attributes.Add("class", "alert alert-danger");
+                output.InnerHtml = "Error cannot add";
             }
             
         }
@@ -85,11 +119,23 @@ namespace HTTP_5101_Assignment_Final
         protected void unpublish_button_Click(object sender, EventArgs e)
         {
             WebsiteDB dB = new WebsiteDB();
+            Boolean flag = true;
             int pageid = Convert.ToInt32(Request.QueryString["pageid"]);
+            if (pageid.Equals(null) || pageid.Equals(0)) flag = false;
 
-            dB.unPublishWebpage(pageid);
+            if (flag)
+            {
+                dB.unPublishWebpage(pageid);
 
-            Response.Redirect("UpdatePage.aspx?pageid="+pageid);
+                alert.Visible = true;
+                output.InnerHtml = "Un Published Success!";
+            }
+            else
+            {
+                alert.Visible = true;
+                alert.Attributes.Add("class", "alert alert-danger");
+                output.InnerHtml = "Error please go back home";
+            }
         }
     }
 }

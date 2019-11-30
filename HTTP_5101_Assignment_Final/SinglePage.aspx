@@ -1,8 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SinglePage.aspx.cs" Inherits="HTTP_5101_Assignment_Final.SinglePage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1 runat="server" id="title"></h1>
-    <p runat="server" id="authour"></p>
+    <h1 runat="server" id="title" class="mt-2"></h1>
+
+        <p class="lead">By: <span runat="server" id="author"></span><span runat="server" id="state" class="badge badge-light" style="margin-left:10px"></span></p>
+
+        <p runat="server" id="date"></p>
+ 
+    
+    
     <p runat="server" id="body"></p>
-    <p runat="server" id="state"></p>
-    <p runat="server" id="date"></p>
+    
+    
 </asp:Content>

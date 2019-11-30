@@ -22,6 +22,24 @@ namespace HTTP_5101_Assignment_Final {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pagename;
         
         /// <summary>
+        /// alert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert;
+        
+        /// <summary>
+        /// output control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl output;
+        
+        /// <summary>
         /// updatepageForm control.
         /// </summary>
         /// <remarks>
@@ -40,15 +58,6 @@ namespace HTTP_5101_Assignment_Final {
         protected global::System.Web.UI.WebControls.TextBox txtpage_title;
         
         /// <summary>
-        /// txtpage_body control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtpage_body;
-        
-        /// <summary>
         /// ddpage_author control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace HTTP_5101_Assignment_Final {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddpage_author;
+        
+        /// <summary>
+        /// txtpage_body control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtpage_body;
         
         /// <summary>
         /// publish_button control.
