@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace HTTP_5101_Assignment_Final
 {
+    // Referenceing SCHOOLDB from crud_essentials 
     public class WebsiteDB
     {
         // Database connection data
@@ -30,29 +31,30 @@ namespace HTTP_5101_Assignment_Final
             }
         }
 
+        //List all pages
         public List<Dictionary<String,String>> List_Query(string Query)
         {
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
 
-            List<Dictionary<String, String>> ResultSet = new List<Dictionary<String, String>>();
+            List<Dictionary<String, String>> resultList = new List<Dictionary<String, String>>();
 
             // check if connected to database
             try
             {
-                Connect.Open();
-                MySqlCommand cmd = new MySqlCommand(Query, Connect);
+                sqlCon.Open();
+                MySqlCommand cmd = new MySqlCommand(Query, sqlCon);
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
                 while (resultset.Read())
                 {
-                    Dictionary<String, String> Row = new Dictionary<String, String>();
+                    Dictionary<String, String> row = new Dictionary<String, String>();
                     for (int i = 0; i < resultset.FieldCount; i++)
                     {
-                        Row.Add(resultset.GetName(i), resultset.GetString(i));
+                        row.Add(resultset.GetName(i), resultset.GetString(i));
 
                     }
 
-                    ResultSet.Add(Row);
+                    resultList.Add(row);
                 }
                 resultset.Close();
 
@@ -62,22 +64,22 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine("Check the List_Query()");
                 Debug.WriteLine(ex.ToString());
             }
-            Connect.Close();
+            sqlCon.Close();
             Debug.WriteLine("Database Connection Terminated.");
 
-            return ResultSet;
+            return resultList;
         }
         public Webpage FindWebPage(int id)
         {
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
             Webpage result_page = new Webpage();
 
             try
             {
                 string query = "select * from PAGES where page_id = " + id;
 
-                Connect.Open();
-                MySqlCommand cmd = new MySqlCommand(query, Connect);
+                sqlCon.Open();
+                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
                 List<Webpage> page = new List<Webpage>();
@@ -122,7 +124,7 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine(ex.ToString());
             }
 
-            Connect.Close();
+            sqlCon.Close();
             Debug.WriteLine("Database Connection Terminated.");
 
             return result_page;
@@ -132,11 +134,11 @@ namespace HTTP_5101_Assignment_Final
             string query = "insert into pages(page_title,page_body,publish_author,publish_state,publish_date) values ('{0}','{1}','{2}','{3}','{4}')";
             query = String.Format(query, webpage.get_W_title(), webpage.get_W_body(), webpage.get_W_author(), webpage.get_W_publish_state(), webpage.get_W_publish_date());
 
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             try
             {
-                Connect.Open();
+                sqlCon.Open();
                 cmd.ExecuteNonQuery();
 
             }
@@ -146,18 +148,18 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine(ex.ToString());
             }
 
-            Connect.Close();
+            sqlCon.Close();
         }
         public void UpdateWebpage(int pageid,Webpage webpage)
         {
             string query = "update pages set page_title='{0}', page_body='{1}', publish_author='{2}' where page_id = "+pageid;
             query = String.Format(query, webpage.get_W_title(), webpage.get_W_body(), webpage.get_W_author());
 
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             try
             {
-                Connect.Open();
+                sqlCon.Open();
                 cmd.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + query);
             }
@@ -167,19 +169,21 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine(ex.ToString());
             }
 
-            Connect.Close();
+            sqlCon.Close();
         }
+
+        //publish the website by added a publish state to the publish collumn
         public void publishWebpage(int pageid,string date)
         {
             string query = "update pages set publish_state='Published', publish_date = '"+date+"' where page_id = "+pageid;
             query = String.Format(query);
 
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             try
             {
                 //Update with user info
-                Connect.Open();
+                sqlCon.Open();
                 cmd.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + query);
             }
@@ -189,18 +193,19 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine(ex.ToString());
             }
 
-            Connect.Close();
+            sqlCon.Close();
         }
+        //unpublish the website by added a not publish state to the publish collumn
         public void unPublishWebpage(int pageid)
         {
             string query = "update pages set publish_state = 'Not Published', publish_date ='' where page_id = " + pageid;
             query = String.Format(query);
 
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            MySqlCommand cmd = new MySqlCommand(query, Connect);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd = new MySqlCommand(query, sqlCon);
             try
             {
-                Connect.Open();
+                sqlCon.Open();
                 cmd.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + query);
             }
@@ -210,21 +215,21 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine(ex.ToString());
             }
 
-            Connect.Close();
+            sqlCon.Close();
         }
+        //delete the webpage from the database
         public void DeleteWebpage(int pageid)
         {
             string deletePage = "delete from pages where page_id = "+pageid;
             deletePage = String.Format(deletePage, pageid);
 
-            MySqlConnection Connect = new MySqlConnection(ConnectionString);
-            //This command removes all the target student's classes from the studentsxclasses table
-            MySqlCommand cmd_deletepage = new MySqlCommand(deletePage, Connect);
+            MySqlConnection sqlCon = new MySqlConnection(ConnectionString);
+            MySqlCommand cmd_deletepage = new MySqlCommand(deletePage, sqlCon);
 
             try
             {
                 //delete from database
-                Connect.Open();
+                sqlCon.Open();
                 cmd_deletepage.ExecuteNonQuery();
                 Debug.WriteLine("Executed query " + cmd_deletepage);
             }
@@ -234,7 +239,7 @@ namespace HTTP_5101_Assignment_Final
                 Debug.WriteLine(ex.ToString());
             }
 
-            Connect.Close();
+            sqlCon.Close();
         }
     }
 }

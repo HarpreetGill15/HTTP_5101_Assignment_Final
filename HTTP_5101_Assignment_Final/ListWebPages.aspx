@@ -7,6 +7,9 @@
         .displayTable{
             padding:15px;
         }
+        .glyphicon{
+            font-size:25px;
+        }
     </style>
     <h1>Dashboard</h1>
     <p class="lead">Here is your dashboard where you can view all your pages and search for pages.</p>

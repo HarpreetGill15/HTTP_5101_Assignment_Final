@@ -12,24 +12,32 @@ namespace HTTP_5101_Assignment_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //hide the alert on page load
             alert.Visible = false;
         }
 
         protected void yes_delete_Click(object sender, EventArgs e)
         {
             Boolean flag = true;
+
+            //get the pageid from the request and convert the string to int
             int pageid = Convert.ToInt32(Request.QueryString["pageid"]);
+
+            //if the id that requested is null or is 0 set the flag to false
             if (pageid.Equals(null) || pageid.Equals(0)) flag = false;
 
+            //if the flag is true continue with the logic
             if (flag)
             {
-
-                Debug.WriteLine(pageid);
                 WebsiteDB db = new WebsiteDB();
 
+                //use the websitedb class and delete the page from the table
                 db.DeleteWebpage(pageid);
+
+                //redirect the user to the listwebpages page
                 Response.Redirect("ListWebPages.aspx");
             }
+            //if it is false show the alert and the error
             else
             {
                 alert.Visible = true;
@@ -38,6 +46,7 @@ namespace HTTP_5101_Assignment_Final
             }
         }
 
+        //if user does not want to delete the page they can go back to the listwebpages page
         protected void go_back_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListWebPages.aspx");
