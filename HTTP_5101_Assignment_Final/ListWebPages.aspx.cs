@@ -35,7 +35,7 @@ namespace HTTP_5101_Assignment_Final
                         "<th>Page Title</th>" +
                         "<th>Author</th>" +
                         "<th>State</th>" +
-                        "<th>Edit/Update/Delete</th>" +
+                        "<th>Update/Delete</th>" +
                         "</tr></thead><tbody>";
 
                     foreach (Dictionary<String, String> row in rs)
@@ -52,9 +52,10 @@ namespace HTTP_5101_Assignment_Final
                         string pagestate = row["publish_state"];
                         list_pages.InnerHtml += "<td>" + pagestate + "</td>";
 
+                        //was supposed to be icons but due to bootstrap 4 dropping glyphicon in v4.4 had to stick to badges
                         list_pages.InnerHtml += "<td><a href=\"UpdatePage.aspx?pageid=" + pageid + "\">" +
-                            "<span class=\"glyphicon glyphicon-upload\"></span><span class=\"glyphicon glyphicon-cog\"></span></a>" +
-                            "<a href=\"DeletePage.aspx?pageid=" + pageid + "\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>";
+                            "<span class=\"badge badge-pill badge-info\">Edit</span></a>" +
+                            "<a href=\"DeletePage.aspx?pageid=" + pageid + "\"><span class=\"badge badge-pill badge-danger\">Delete</span></a></td>";
 
                         list_pages.InnerHtml += "</tr>";
                     }

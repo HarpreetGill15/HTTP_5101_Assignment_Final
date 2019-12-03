@@ -19,7 +19,7 @@ namespace HTTP_5101_Assignment_Final
 
 
             nav.InnerHtml = "<ul class=\"nav navbar-nav\">"+
-                            "<li><a runat=\"server\" href=\"ListWebPages.aspx\">Dashboard</a></li>";
+                            "<li class=\"nav-item\"><a runat=\"server\" href=\"ListWebPages.aspx\" class=\"nav-link\">Dashboard</a></li>";
 
             if (page.Count > 0)
             {
@@ -28,7 +28,7 @@ namespace HTTP_5101_Assignment_Final
                     string pagetitle = pagedata["page_title"];
                     string pageid = pagedata["page_id"];
 
-                    nav.InnerHtml += "<li><a runat = \"server\" href = \"SinglePage.aspx?pageid=" + pageid + "\">" + pagetitle+"</a></li>";
+                    nav.InnerHtml += "<li class=\"nav-item\"><a runat = \"server\" href = \"SinglePage.aspx?pageid=" + pageid + "\" class=\"nav-link\">" + pagetitle+"</a></li>";
                 }
                 nav.InnerHtml += "</ul>";
             }
