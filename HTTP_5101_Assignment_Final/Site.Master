@@ -49,21 +49,6 @@
 		        </div>
 	        </div>
         </nav>
-        <%--<nav class="navbar navbar-dark navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    
-                </div>
-                <div class="navbar-collapse collapse" id="nav" runat="server">
-                    
-                </div>
-            </div>
-        </nav>--%>
         <div class="container body-content py-4">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
