@@ -12,8 +12,10 @@ namespace HTTP_5101_Assignment_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //hide the alert on page load
-            alert.Visible = false;
+            //getting the page title to paste to the page
+            string pagetitle = Request.QueryString["pagetitle"];
+
+            title.InnerText = pagetitle;
         }
 
         protected void yes_delete_Click(object sender, EventArgs e)
@@ -37,13 +39,7 @@ namespace HTTP_5101_Assignment_Final
                 //redirect the user to the listwebpages page
                 Response.Redirect("ListWebPages.aspx");
             }
-            //if it is false show the alert and the error
-            else
-            {
-                alert.Visible = true;
-                alert.Attributes.Add("class", "alert alert-danger");
-                output.InnerHtml = "Error please return home";
-            }
+            
         }
 
         //if user does not want to delete the page they can go back to the listwebpages page

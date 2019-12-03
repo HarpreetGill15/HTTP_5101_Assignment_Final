@@ -19,7 +19,7 @@ namespace HTTP_5101_Assignment_Final
             string search_text = webpage_search.Text.ToString();
             
             //create a query with the user input in the query
-            string query = "select * from pages join author on publish_author = author_id ";
+            string query = "select * from pages join author on publish_author = author_id order by page_id asc";
 
             //where page_title like '%" + search_text + "%' join author on publish_author = author_id
 
@@ -55,7 +55,7 @@ namespace HTTP_5101_Assignment_Final
                         //was supposed to be icons but due to bootstrap 4 dropping glyphicon in v4.4 had to stick to badges
                         list_pages.InnerHtml += "<td><a href=\"UpdatePage.aspx?pageid=" + pageid + "\">" +
                             "<span class=\"badge badge-pill badge-info\">Edit</span></a>" +
-                            "<a href=\"DeletePage.aspx?pageid=" + pageid + "\"><span class=\"badge badge-pill badge-danger\">Delete</span></a></td>";
+                            "<a href=\"DeletePage.aspx?pageid=" + pageid + "&pagetitle="+pagetitle+"\"><span class=\"badge badge-pill badge-danger\">Delete</span></a></td>";
 
                         list_pages.InnerHtml += "</tr>";
                     }

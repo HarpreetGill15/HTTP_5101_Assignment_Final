@@ -6,21 +6,33 @@
             margin:0 5px;
         }
     </style>
+
     <h1>Dashboard</h1>
+
+    <svg width="14%" height="10px">
+            <rect width="100%" height="10px"></rect>
+    </svg>
     <p class="lead">Here is your dashboard where you can view all your pages and search for pages.</p>
-        <div class="form-inline mb-4">
-            <div class="form-group">
-                <label for="webpage_search">Search for Page:</label>
-                <asp:TextBox class="form-control" id="webpage_search" runat="server"></asp:TextBox>
-            
-            </div>
-            <asp:Button runat="server" Text="Search!" CssClass="btn btn-primary"/>
-            
-        </div>
+
+    <div class="form-inline mb-4">
+         <div class="form-group">
+             <label for="webpage_search">Search for Page</label>
+             <asp:TextBox class="form-control" id="webpage_search" runat="server"></asp:TextBox>        
+         </div>
+         <asp:Button runat="server" Text="Search!" CssClass="btn btn-primary"/> 
+    </div>
     <asp:Button runat="server" Text="Add a Page" onClick="addPage" CssClass="btn btn-primary float-right"/>
+
     <h2>Your Pages</h2>
+
+    <svg width="10%" height="10px">
+            <rect width="100%" height="10px"></rect>
+    </svg>
+
     <p>You can also edit and delete a page. Along with adding a webpage</p>
+
     <div id="list_pages" runat="server" class="bg-light displayTable">
 
     </div>
+
 </asp:Content>

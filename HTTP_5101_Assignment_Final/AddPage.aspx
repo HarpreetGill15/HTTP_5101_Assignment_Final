@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="ddpage_author" class="col-sm-2 col-form-label">Page Author</label>
+                    <label for="ddpage_author" class="col-sm-2 col-form-label">Page Author:</label>
                     <div class="col-sm-5">
                         <asp:DropDownList ID="ddpage_author" runat="server">
                         </asp:DropDownList>
